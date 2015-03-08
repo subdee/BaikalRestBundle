@@ -12,7 +12,7 @@ use Sabre\VObject;
 
 use Baikal\ModelBundle\Entity\Repository\CalendarRepository,
     Baikal\ModelBundle\Entity\Calendar,
-    Baikal\SystemBundle\Services\BaikalConfigServiceInterface;
+    Baikal\KernelBundle\Services\BaikalConfigServiceInterface;
 
 class CalendarController {
 

@@ -8,7 +8,7 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface,
 
 use Sabre\VObject;
 
-use Baikal\SystemBundle\Services\BaikalConfigServiceInterface,
+use Baikal\KernelBundle\Services\BaikalConfigServiceInterface,
     Baikal\DavServicesBundle\Service\Helper\DavTimeZoneHelper;
 
 class EventSerializationSubscriber implements EventSubscriberInterface {
