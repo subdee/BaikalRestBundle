@@ -1,0 +1,18 @@
+{
+    "name": "baikal/rest-bundle",
+    "version": "2.0.0-alpha1",
+    "description": "Baïkal REST Bundle",
+    "type": "symfony-bundle",
+    "autoload": {
+        "psr-0": { "Baikal\\RestBundle": "" }
+    },
+    "target-dir": "Baikal/RestBundle",
+    "license": "GNU-GPL",
+    "authors": [
+        {
+            "name": "Jérôme Schneider - Net Gusto",
+            "email": "contact@netgusto.com"
+        }
+    ],
+    "require": {}
+}
