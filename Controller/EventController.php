@@ -23,7 +23,7 @@ use Baikal\ModelBundle\Entity\Repository\EventRepository,
     Baikal\ModelBundle\Entity\Calendar,
     Baikal\ModelBundle\Entity\Event,
     Baikal\ModelBundle\Form\Type\Calendar\EventType,
-    Baikal\CoreBundle\Services\BaikalConfigServiceInterface,
+    Baikal\SystemBundle\Services\BaikalConfigServiceInterface,
     Baikal\RestBundle\Validator\Constraints\DateISO8601 as DateISO8601Constraint,
     Baikal\DavServicesBundle\Service\Helper\DavTimeZoneHelper;
 

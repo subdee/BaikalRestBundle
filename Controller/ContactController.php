@@ -13,7 +13,7 @@ use Sabre\VObject;
 use Baikal\ModelBundle\Entity\Repository\AddressbookContactRepository,
     Baikal\ModelBundle\Entity\Addressbook,
     Baikal\ModelBundle\Entity\AddressbookContact,
-    Baikal\CoreBundle\Services\BaikalConfigServiceInterface;
+    Baikal\SystemBundle\Services\BaikalConfigServiceInterface;
 
 class ContactController {
 

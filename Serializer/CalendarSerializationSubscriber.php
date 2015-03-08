@@ -7,7 +7,7 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface,
 
 use Sabre\VObject;
 
-use Baikal\CoreBundle\Services\BaikalConfigServiceInterface;
+use Baikal\SystemBundle\Services\BaikalConfigServiceInterface;
 
 class CalendarSerializationSubscriber implements EventSubscriberInterface {
     

@@ -19,7 +19,7 @@ use Sabre\VObject;
 use Baikal\ModelBundle\Entity\Repository\AddressbookRepository,
     Baikal\ModelBundle\Entity\Addressbook,
     Baikal\ModelBundle\Form\Type\Addressbook\AddressbookType,
-    Baikal\CoreBundle\Services\BaikalConfigServiceInterface;
+    Baikal\SystemBundle\Services\BaikalConfigServiceInterface;
 
 class AddressbookController {
 
