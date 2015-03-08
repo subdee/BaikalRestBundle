@@ -14,5 +14,9 @@
             "email": "contact@netgusto.com"
         }
     ],
-    "require": {}
+    "require": {
+        "nelmio/cors-bundle": "~1.3.2",
+        "friendsofsymfony/rest-bundle": "~1.4.2",
+        "jms/serializer-bundle": "~0.13.0"
+    }
 }
