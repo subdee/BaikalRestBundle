@@ -11,25 +11,21 @@ use FOS\RestBundle\View\View,
 use Sabre\VObject;
 
 use Baikal\ModelBundle\Entity\Repository\CalendarRepository,
-    Baikal\ModelBundle\Entity\Calendar,
-    Baikal\KernelBundle\Services\BaikalConfigServiceInterface;
+    Baikal\ModelBundle\Entity\Calendar;
 
 class CalendarController {
 
     protected $securityContext;
     protected $calendarRepo;
-    protected $mainconfig;
 
     public function __construct(
         ViewHandlerInterface $viewhandler,
         SecurityContextInterface $securityContext,
-        CalendarRepository $calendarRepo,
-        BaikalConfigServiceInterface $mainconfig
+        CalendarRepository $calendarRepo
     ) {
         $this->viewhandler = $viewhandler;
         $this->securityContext = $securityContext;
         $this->calendarRepo = $calendarRepo;
-        $this->mainconfig = $mainconfig;
     }
     
     public function getCalendarsAction() {

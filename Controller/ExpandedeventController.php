@@ -17,7 +17,6 @@ use Sabre\VObject;
 use Baikal\ModelBundle\Entity\Repository\EventRepository,
     Baikal\ModelBundle\Entity\Calendar,
     Baikal\ModelBundle\Entity\Event,
-    Baikal\KernelBundle\Services\BaikalConfigServiceInterface,
     Baikal\RestBundle\Validator\Constraints\DateISO8601 as DateISO8601Constraint,
     Baikal\DavServicesBundle\Service\Helper\DavTimeZoneHelper;
 
@@ -26,20 +25,17 @@ class ExpandedeventController extends AbstractEventController {
     protected $viewhandler;
     protected $securityContext;
     protected $eventRepo;
-    protected $mainconfig;
     protected $timezonehelper;
 
     public function __construct(
         ViewHandlerInterface $viewhandler,
         SecurityContextInterface $securityContext,
         EventRepository $eventRepo,
-        BaikalConfigServiceInterface $mainconfig,
         DavTimeZoneHelper $timezonehelper
     ) {
         $this->viewhandler = $viewhandler;
         $this->securityContext = $securityContext;
         $this->eventRepo = $eventRepo;
-        $this->mainconfig = $mainconfig;
         $this->timezonehelper = $timezonehelper;
     }
 

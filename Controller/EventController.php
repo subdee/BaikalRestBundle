@@ -23,7 +23,6 @@ use Baikal\ModelBundle\Entity\Repository\EventRepository,
     Baikal\ModelBundle\Entity\Calendar,
     Baikal\ModelBundle\Entity\Event,
     Baikal\ModelBundle\Form\Type\Calendar\EventType,
-    Baikal\KernelBundle\Services\BaikalConfigServiceInterface,
     Baikal\RestBundle\Validator\Constraints\DateISO8601 as DateISO8601Constraint,
     Baikal\DavServicesBundle\Service\Helper\DavTimeZoneHelper;
 
@@ -36,7 +35,6 @@ class EventController extends AbstractEventController {
     protected $securityContext;
     protected $calendarRepo;
     protected $eventRepo;
-    protected $mainconfig;
     protected $timezonehelper;
 
     public function __construct(
@@ -47,7 +45,6 @@ class EventController extends AbstractEventController {
         SecurityContextInterface $securityContext,
         CalendarRepository $calendarRepo,
         EventRepository $eventRepo,
-        BaikalConfigServiceInterface $mainconfig,
         DavTimeZoneHelper $timezonehelper,
         CalDAVBackendInterface $davbackend
     ) {
@@ -58,7 +55,6 @@ class EventController extends AbstractEventController {
         $this->securityContext = $securityContext;
         $this->calendarRepo = $calendarRepo;
         $this->eventRepo = $eventRepo;
-        $this->mainconfig = $mainconfig;
         $this->timezonehelper = $timezonehelper;
         $this->davbackend = $davbackend;
     }

@@ -18,8 +18,7 @@ use Sabre\VObject;
 
 use Baikal\ModelBundle\Entity\Repository\AddressbookRepository,
     Baikal\ModelBundle\Entity\Addressbook,
-    Baikal\ModelBundle\Form\Type\Addressbook\AddressbookType,
-    Baikal\KernelBundle\Services\BaikalConfigServiceInterface;
+    Baikal\ModelBundle\Form\Type\Addressbook\AddressbookType;
 
 class AddressbookController {
 
@@ -29,7 +28,6 @@ class AddressbookController {
     protected $viewhandler;
     protected $securityContext;
     protected $addressbookRepo;
-    protected $mainconfig;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -37,8 +35,7 @@ class AddressbookController {
         FormFactoryInterface $formFactory,
         ViewHandlerInterface $viewhandler,
         SecurityContextInterface $securityContext,
-        AddressbookRepository $addressbookRepo,
-        BaikalConfigServiceInterface $mainconfig
+        AddressbookRepository $addressbookRepo
     ) {
         $this->em = $em;
         $this->router = $router;
@@ -46,7 +43,6 @@ class AddressbookController {
         $this->viewhandler = $viewhandler;
         $this->securityContext = $securityContext;
         $this->addressbookRepo = $addressbookRepo;
-        $this->mainconfig = $mainconfig;
     }
     
     public function getAddressbooksAction() {

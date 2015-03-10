@@ -8,15 +8,9 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface,
 
 use Sabre\VObject;
 
-use Baikal\KernelBundle\Services\BaikalConfigServiceInterface;
-
 class AddressbookSerializationSubscriber implements EventSubscriberInterface {
-    
-    protected $mainconfig;
 
-    public function __construct(BaikalConfigServiceInterface $mainconfig) {
-        $this->mainconfig = $mainconfig;
-    }
+    public function __construct() { }
 
     public static function getSubscribedEvents() {
         return array(

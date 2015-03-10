@@ -6,7 +6,6 @@ services:
             - @fos_rest.view_handler
             - @security.context
             - @baikal.repository.calendar
-            - @config.main
 
     baikal.rest.controller.expandedevent:
         class: Baikal\RestBundle\Controller\ExpandedeventController
@@ -14,7 +13,6 @@ services:
             - @fos_rest.view_handler
             - @security.context
             - @baikal.repository.event
-            - @config.main
             - @baikal.helper.davtimezonehelper
 
     baikal.rest.controller.event:
@@ -29,7 +27,6 @@ services:
             - @baikal.repository.calendar
             - @baikal.repository.event
             
-            - @config.main
             - @baikal.helper.davtimezonehelper
             - @baikal.davservice.backend.caldav
 
@@ -43,7 +40,6 @@ services:
             - @security.context
 
             - @baikal.repository.addressbook
-            - @config.main
 
     baikal.rest.controller.contact:
         class: Baikal\RestBundle\Controller\ContactController
@@ -51,33 +47,27 @@ services:
             - @fos_rest.view_handler
             - @security.context
             - @baikal.repository.contact
-            - @config.main
 
     baikal.rest.serializer.calendar:
         class: Baikal\RestBundle\Serializer\CalendarSerializationSubscriber
         arguments:
-            - @config.main
+            - @baikal.helper.davtimezonehelper
         tags:
             - { name: jms_serializer.event_subscriber }
 
     baikal.rest.serializer.event:
         class: Baikal\RestBundle\Serializer\EventSerializationSubscriber
         arguments:
-            - @config.main
             - @baikal.helper.davtimezonehelper
         tags:
             - { name: jms_serializer.event_subscriber }
 
     baikal.rest.serializer.addressbook:
         class: Baikal\RestBundle\Serializer\AddressbookSerializationSubscriber
-        arguments:
-            - @config.main
         tags:
             - { name: jms_serializer.event_subscriber }
 
     baikal.rest.serializer.contact:
         class: Baikal\RestBundle\Serializer\AddressbookContactSerializationSubscriber
-        arguments:
-            - @config.main
         tags:
             - { name: jms_serializer.event_subscriber }

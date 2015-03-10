@@ -7,16 +7,14 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface,
 
 use Sabre\VObject;
 
-use Baikal\KernelBundle\Services\BaikalConfigServiceInterface;
+use Baikal\DavServicesBundle\Service\Helper\DavTimeZoneHelper;
 
 class CalendarSerializationSubscriber implements EventSubscriberInterface {
     
-    protected $mainconfig;
+    protected $timezonehelper;
 
-    public function __construct(
-        BaikalConfigServiceInterface $mainconfig
-    ) {
-        $this->mainconfig = $mainconfig;
+    public function __construct(DavTimeZoneHelper $timezonehelper) {
+        $this->timezonehelper = $timezonehelper;
     }
 
     public static function getSubscribedEvents() {
@@ -32,17 +30,7 @@ class CalendarSerializationSubscriber implements EventSubscriberInterface {
     public function onPostSerialize_Calendar(ObjectEvent $event) {
         
         $calendar = $event->getObject();
-
-        try {
-            $timezone = VObject\TimeZoneUtil::getTimeZone(
-                null,
-                VObject\Reader::read($calendar->getTimezone()),
-                TRUE    # failIfUncertain
-            );
-        } catch(\Exception $e) {
-            # Defaulting to Server timezone
-            $timezone = $this->mainconfig->getServerTimezone();
-        }
+        $timezone = $this->timezonehelper->extractTimeZoneFromDavString($calendar->getTimezone());
 
         $event->getVisitor()->addData(
             'timezone',

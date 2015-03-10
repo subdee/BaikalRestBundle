@@ -8,18 +8,11 @@ use JMS\Serializer\EventDispatcher\EventSubscriberInterface,
 
 use Sabre\VObject;
 
-use Baikal\KernelBundle\Services\BaikalConfigServiceInterface,
-    Baikal\DavServicesBundle\Service\Helper\DavTimeZoneHelper;
+use Baikal\DavServicesBundle\Service\Helper\DavTimeZoneHelper;
 
 class EventSerializationSubscriber implements EventSubscriberInterface {
-    
-    protected $mainconfig;
 
-    public function __construct(
-        BaikalConfigServiceInterface $mainconfig,
-        DavTimeZoneHelper $timezonehelper
-    ) {
-        $this->mainconfig = $mainconfig;
+    public function __construct(DavTimeZoneHelper $timezonehelper) {
         $this->timezonehelper = $timezonehelper;
     }
 

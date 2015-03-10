@@ -12,26 +12,22 @@ use Sabre\VObject;
 
 use Baikal\ModelBundle\Entity\Repository\AddressbookContactRepository,
     Baikal\ModelBundle\Entity\Addressbook,
-    Baikal\ModelBundle\Entity\AddressbookContact,
-    Baikal\KernelBundle\Services\BaikalConfigServiceInterface;
+    Baikal\ModelBundle\Entity\AddressbookContact;
 
 class ContactController {
 
     protected $viewhandler;
     protected $securityContext;
     protected $contactRepo;
-    protected $mainconfig;
 
     public function __construct(
         ViewHandlerInterface $viewhandler,
         SecurityContextInterface $securityContext,
-        AddressbookContactRepository $contactRepo,
-        BaikalConfigServiceInterface $mainconfig
+        AddressbookContactRepository $contactRepo
     ) {
         $this->viewhandler = $viewhandler;
         $this->securityContext = $securityContext;
         $this->contactRepo = $contactRepo;
-        $this->mainconfig = $mainconfig;
     }
     
     public function getContactsAction(Addressbook $addressbook) {
