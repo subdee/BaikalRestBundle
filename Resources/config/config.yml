@@ -1,20 +1,58 @@
 #parameters:
 #    jms_serializer.json_serialization_visitor.class: 'Baikal\RestBundle\Serializer\SideLoadJsonSerializationVisitor'
 
+sensio_framework_extra:
+    view:
+        annotations: false
+
+# nelmio_cors:
+#     paths:
+#         '^/api/':
+#             allow_origin: ['*']
+#             allow_headers: ['*']
+#             allow_methods: ['OPTIONS', 'POST', 'PUT', 'GET', 'DELETE']
+#             max_age: 3600
+
 fos_rest:
+    param_fetcher_listener: force
+    body_listener: false
+    allowed_methods_listener: true
+    disable_csrf_role: ROLE_API
+
+    format_listener: false
+
     view:
         view_response_listener: force
         formats:
             json: true
+
     routing_loader:
         # no {_format} in the generated routes
-        include_format: false
         default_format: json
-    format_listener:
-        rules:
-            - priorities: [json]
-            - fallback_format: json
+        include_format: false
 
-sensio_framework_extra:
-    view:
-        annotations: false
+    service:
+        router: router
+        templating: templating
+        serializer: jms_serializer.serializer
+        #serializer: serializer
+        view_handler: fos_rest.view_handler.default
+
+    serializer:
+        serialize_null: true
+
+jms_serializer:
+    metadata:
+        auto_detection: true
+        directories:
+            Baikal:
+                path: "@BaikalRestBundle/Resources/config/serializer"
+
+fos_oauth_server:
+    db_driver: orm       # Driver availables: orm, mongodb, or propel
+    client_class:        Baikal\ModelBundle\Entity\OAuthClient
+    access_token_class:  Baikal\ModelBundle\Entity\OAuthAccessToken
+    refresh_token_class: Baikal\ModelBundle\Entity\OAuthRefreshToken
+    auth_code_class:     Baikal\ModelBundle\Entity\OAuthAuthCode
+    service:
+        user_provider: sabredav_user_db
