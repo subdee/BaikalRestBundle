@@ -2,6 +2,10 @@
 
 namespace Baikal\RestBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Sabre\DAV\UUIDUtil;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\SecurityContextInterface,
     Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -13,21 +17,28 @@ use Sabre\VObject;
 use Baikal\ModelBundle\Entity\Repository\CalendarRepository,
     Baikal\ModelBundle\Entity\Calendar;
 
+use Sabre\CalDAV\Backend\BackendInterface as CalDAVBackendInterface;
+
 class CalendarController {
 
     protected $securityContext;
     protected $calendarRepo;
+    protected $em;
 
     public function __construct(
         ViewHandlerInterface $viewhandler,
         SecurityContextInterface $securityContext,
-        CalendarRepository $calendarRepo
+        CalendarRepository $calendarRepo,
+        EntityManagerInterface $em,
+        CalDAVBackendInterface $davbackend
     ) {
         $this->viewhandler = $viewhandler;
         $this->securityContext = $securityContext;
         $this->calendarRepo = $calendarRepo;
+        $this->em = $em;
+        $this->davbackend = $davbackend;
     }
-    
+
     public function getCalendarsAction() {
 
         if(!$this->securityContext->isGranted('rest.api')) {
@@ -58,6 +69,25 @@ class CalendarController {
             View::create([
                 'calendar' => $calendar,
             ], 200)
+        );
+    }
+
+    public function postCalendarAction(Request $request) {
+        $data = json_decode($request->getContent(), TRUE);
+
+        $calendar = new Calendar();
+        $uid = strtoupper(UUIDUtil::getUUID());
+        $calendar->setUri($uid);
+        $calendar->setPrincipaluri('principals/admin');
+        $calendar->setDisplayname($data['displayName']);
+        $calendar->setDescription($data['description']);
+        $this->em->persist($calendar);
+        $this->em->flush();
+
+        return $this->viewhandler->handle(
+            View::create([
+                'calendar' => $calendar,
+            ], Response::HTTP_CREATED)
         );
     }
 }

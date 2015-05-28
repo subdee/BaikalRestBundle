@@ -7,6 +7,9 @@ services:
             - @security.context
             - @baikal.repository.calendar
 
+            - @doctrine.orm.entity_manager
+            - @baikal.davservice.backend.caldav
+
     baikal.rest.controller.expandedevent:
         class: Baikal\RestBundle\Controller\ExpandedeventController
         arguments:
