@@ -1,5 +1,5 @@
 {
-    "name": "baikal/rest-bundle",
+    "name": "subdee/baikal-rest-bundle",
     "version": "2.0.0-alpha1",
     "description": "Baïkal REST Bundle",
     "type": "symfony-bundle",
